@@ -12,6 +12,7 @@
 {
     SKNode *_mainLayer;
     SKSpriteNode *_cannon;
+    SKSpriteNode *_ammoDisplay;
     BOOL _didShoot;
 }
 
@@ -23,6 +24,7 @@ static const CGFloat kCCHaloSpeed = 100.0;
 static const uint32_t kCCHaloCategory = 0x1 << 0;
 static const uint32_t kCCBallCategory = 0x1 << 1;
 static const uint32_t kCCEdgeCategory = 0x1 << 2;
+static const uint32_t kCCShieldCategory = 0x1 << 3;
 
 static inline CGVector radiansToVector(CGFloat radians)
 {
@@ -86,27 +88,62 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
         SKAction *spawnHalo = [SKAction sequence:@[[SKAction waitForDuration:2 withRange:1],
                                                    [SKAction performSelector:@selector(spawnHalo) onTarget:self]]];
         [self runAction:[SKAction repeatActionForever:spawnHalo]];
+        
+        // Setup Ammo.
+        _ammoDisplay = [SKSpriteNode spriteNodeWithImageNamed:@"Ammo5"];
+        _ammoDisplay.anchorPoint = CGPointMake(0.5, 0.0);
+        _ammoDisplay.position = _cannon.position;
+        [_mainLayer addChild:_ammoDisplay];
+        self.ammo = 5;
+        
+        SKAction *incrementAmmo = [SKAction sequence:@[[SKAction waitForDuration:1],
+                                                       [SKAction runBlock:^{
+            self.ammo++;
+        }]]];
+        [self runAction:[SKAction repeatActionForever:incrementAmmo]];
+        
+        // Setup shields
+        for (int i = 0; i < 6; i++) {
+            SKSpriteNode *shield = [SKSpriteNode spriteNodeWithImageNamed:@"Block"];
+            shield.position = CGPointMake(35 + (50 * i), 90);
+            [_mainLayer addChild:shield];
+            shield.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(42, 9)];
+            shield.physicsBody.categoryBitMask = kCCShieldCategory;
+            shield.physicsBody.collisionBitMask = 0;
+        }
+        
     }
     return self;
 }
 
+-(void)setAmmo:(int)ammo
+{
+    if (ammo >= 0 && ammo <=5) {
+        _ammo = ammo;
+        _ammoDisplay.texture = [SKTexture textureWithImageNamed:[NSString stringWithFormat:@"Ammo%d", ammo]];
+    }
+}
+
 -(void)shoot
 {
-    // Create ball mode.
-    SKSpriteNode *ball = [SKSpriteNode spriteNodeWithImageNamed:@"Ball"];
-    ball.name = @"ball";
-    CGVector rotationVector = radiansToVector(_cannon.zRotation);
-    ball.position = CGPointMake(_cannon.position.x + (_cannon.size.width * 0.5 * rotationVector.dx),
+    if(self.ammo > 0){
+        self.ammo--;
+         // Create ball mode.
+        SKSpriteNode *ball = [SKSpriteNode spriteNodeWithImageNamed:@"Ball"];
+        ball.name = @"ball";
+        CGVector rotationVector = radiansToVector(_cannon.zRotation);
+        ball.position = CGPointMake(_cannon.position.x + (_cannon.size.width * 0.5 * rotationVector.dx),
                                 _cannon.position.y + (_cannon.size.width * 0.5 * rotationVector.dy));
-    [_mainLayer addChild:ball];
+        [_mainLayer addChild:ball];
     
-    ball.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:6.0];
-    ball.physicsBody.velocity = CGVectorMake(rotationVector.dx * SHOOT_SPEED, rotationVector.dy * SHOOT_SPEED);
-    ball.physicsBody.restitution = 1.0;
-    ball.physicsBody.linearDamping = 0.0;
-    ball.physicsBody.friction = 0.0;
-    ball.physicsBody.categoryBitMask = kCCBallCategory;
-    ball.physicsBody.collisionBitMask = kCCEdgeCategory;
+        ball.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:6.0];
+        ball.physicsBody.velocity = CGVectorMake(rotationVector.dx * SHOOT_SPEED, rotationVector.dy * SHOOT_SPEED);
+        ball.physicsBody.restitution = 1.0;
+        ball.physicsBody.linearDamping = 0.0;
+        ball.physicsBody.friction = 0.0;
+        ball.physicsBody.categoryBitMask = kCCBallCategory;
+        ball.physicsBody.collisionBitMask = kCCEdgeCategory;
+    }
 }
 
 -(void)spawnHalo
@@ -122,7 +159,7 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
     halo.physicsBody.friction = 0.0;
     halo.physicsBody.categoryBitMask = kCCHaloCategory;
     halo.physicsBody.collisionBitMask = kCCEdgeCategory;
-    halo.physicsBody.contactTestBitMask = kCCBallCategory;
+    halo.physicsBody.contactTestBitMask = kCCBallCategory | kCCShieldCategory;
     
     [_mainLayer addChild:halo];
 }
@@ -141,10 +178,33 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
     }
     
     if (firstBody.categoryBitMask == kCCHaloCategory && secondBody.categoryBitMask == kCCBallCategory){
+        [self addExplosion:firstBody.node.position];
+        
         // Collision between halo and ball.
         [firstBody.node removeFromParent];
         [secondBody.node removeFromParent];
     }
+    
+    if (firstBody.categoryBitMask == kCCHaloCategory && secondBody.categoryBitMask == kCCShieldCategory){
+        [self addExplosion:firstBody.node.position];
+        
+        // Collision between halo and shield.
+        [firstBody.node removeFromParent];
+        [secondBody.node removeFromParent];
+    }
+}
+
+-(void)addExplosion:(CGPoint)position
+{
+    NSString *explosionPath = [[NSBundle mainBundle] pathForResource:@"HaloExplosion" ofType:@"sks"];
+    SKEmitterNode *explosion = [NSKeyedUnarchiver unarchiveObjectWithFile:explosionPath];
+    
+    explosion.position = position;
+    [_mainLayer addChild:explosion];
+    
+    SKAction *removeExplosion = [SKAction sequence:@[[SKAction waitForDuration:1.5],
+                                                     [SKAction removeFromParent]]];
+    [explosion runAction:removeExplosion];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

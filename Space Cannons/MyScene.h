@@ -10,4 +10,6 @@
 
 @interface MyScene : SKScene <SKPhysicsContactDelegate>
 
+@property (nonatomic) int ammo;
+
 @end
