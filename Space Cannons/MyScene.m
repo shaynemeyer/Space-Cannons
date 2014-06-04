@@ -130,10 +130,13 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
         _menu.position = CGPointMake(self.size.width * 0.5, self.size.height - 220);
         [self addChild:_menu];
         
+        
+        
+        // Set initial values
+        self.ammo = 5;
+        self.score = 0;
         _gameOver = YES;
-        
-        
-        
+        _scoreLabel.hidden = YES;
     }
     return self;
 }
@@ -142,6 +145,7 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
 {
     self.ammo = 5;
     self.score = 0;
+    _scoreLabel.hidden = NO;
     
     [_mainLayer removeAllChildren];
     
@@ -292,9 +296,13 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
     
     //[self performSelector:@selector(newGame) withObject:nil afterDelay:1.5];
     
+    _menu.score = self.score;
+    if (self.score > _menu.topScore){
+        _menu.topScore = self.score;
+    }
     _menu.hidden = NO;
     _gameOver = YES;
-    
+    _scoreLabel.hidden = YES;
 }
 -(void)addExplosion:(CGPoint)position withName:(NSString *)name
 {

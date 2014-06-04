@@ -10,4 +10,7 @@
 
 @interface CCMenu : SKNode
 
+@property (nonatomic) int score;
+@property (nonatomic) int topScore;
+
 @end
