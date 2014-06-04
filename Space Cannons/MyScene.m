@@ -71,13 +71,13 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
         
         // Add Edges
         SKNode *leftEdge = [[SKNode alloc] init];
-        leftEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointZero toPoint:CGPointMake(0.0, self.size.height)];
+        leftEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointZero toPoint:CGPointMake(0.0, self.size.height + 100)];
         leftEdge.position = CGPointZero;
         leftEdge.physicsBody.categoryBitMask = kCCEdgeCategory;
         [self addChild:leftEdge];
         
         SKNode *rightEdge = [[SKNode alloc] init];
-        rightEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointZero toPoint:CGPointMake(0.0, self.size.height)];
+        rightEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointZero toPoint:CGPointMake(0.0, self.size.height + 100)];
         rightEdge.position = CGPointMake(self.size.width, 0.0);
         rightEdge.physicsBody.categoryBitMask = kCCEdgeCategory;
         [self addChild:rightEdge];
@@ -253,6 +253,8 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
         [self addExplosion:firstBody.node.position withName:@"HaloExplosion"];
         [self runAction:_explosionSound];
         
+        firstBody.categoryBitMask = 0;
+        
         [firstBody.node removeFromParent];
         [secondBody.node removeFromParent];
     }
@@ -263,6 +265,7 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
         [self addExplosion:firstBody.node.position withName:@"HaloExplosion"];
         [self runAction:_explosionSound];
         
+        firstBody.categoryBitMask = 0;
         [firstBody.node removeFromParent];
         [secondBody.node removeFromParent];
     }
@@ -359,6 +362,13 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
     // Remove unused nodes.
     [_mainLayer enumerateChildNodesWithName:@"ball" usingBlock:^(SKNode *node, BOOL *stop) {
         if(!CGRectContainsPoint(self.frame, node.position)){
+            [node removeFromParent];
+        }
+    }];
+    
+    // Remove unused halos.
+    [_mainLayer enumerateChildNodesWithName:@"halo" usingBlock:^(SKNode *node, BOOL *stop) {
+        if(node.position.y + node.frame.size.height < 0){
             [node removeFromParent];
         }
     }];
