@@ -37,6 +37,17 @@
 		D905698B1938B9CF00F845B7 /* Starfield@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D905697F1938B9CF00F845B7 /* Starfield@2x.png */; };
 		D92A380B193CACD4000D0CA7 /* HaloExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = D92A3809193CACD4000D0CA7 /* HaloExplosion.sks */; };
 		D92A380C193CACD4000D0CA7 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = D92A380A193CACD4000D0CA7 /* spark.png */; };
+		D9F4D285193EC50B0027222E /* LifeBarExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = D9F4D284193EC50B0027222E /* LifeBarExplosion.sks */; };
+		D9F4D287193EC76A0027222E /* BounceExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = D9F4D286193EC76A0027222E /* BounceExplosion.sks */; };
+		D9F4D28E193ED7A80027222E /* Bounce.caf in Resources */ = {isa = PBXBuildFile; fileRef = D9F4D289193ED7A80027222E /* Bounce.caf */; };
+		D9F4D28F193ED7A80027222E /* DeepExplosion.caf in Resources */ = {isa = PBXBuildFile; fileRef = D9F4D28A193ED7A80027222E /* DeepExplosion.caf */; };
+		D9F4D290193ED7A80027222E /* Explosion.caf in Resources */ = {isa = PBXBuildFile; fileRef = D9F4D28B193ED7A80027222E /* Explosion.caf */; };
+		D9F4D291193ED7A80027222E /* Laser.caf in Resources */ = {isa = PBXBuildFile; fileRef = D9F4D28C193ED7A80027222E /* Laser.caf */; };
+		D9F4D292193ED7A80027222E /* Zap.caf in Resources */ = {isa = PBXBuildFile; fileRef = D9F4D28D193ED7A80027222E /* Zap.caf */; };
+		D9F4D296193EDCB60027222E /* PlayButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9F4D293193EDCB60027222E /* PlayButton@2x.png */; };
+		D9F4D297193EDCB60027222E /* ScoreBoard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9F4D294193EDCB60027222E /* ScoreBoard@2x.png */; };
+		D9F4D298193EDCB60027222E /* Title@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9F4D295193EDCB60027222E /* Title@2x.png */; };
+		D9F4D29B193EDD070027222E /* CCMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F4D29A193EDD070027222E /* CCMenu.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +97,18 @@
 		D905697F1938B9CF00F845B7 /* Starfield@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Starfield@2x.png"; sourceTree = "<group>"; };
 		D92A3809193CACD4000D0CA7 /* HaloExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HaloExplosion.sks; sourceTree = "<group>"; };
 		D92A380A193CACD4000D0CA7 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		D9F4D284193EC50B0027222E /* LifeBarExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LifeBarExplosion.sks; sourceTree = "<group>"; };
+		D9F4D286193EC76A0027222E /* BounceExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BounceExplosion.sks; sourceTree = "<group>"; };
+		D9F4D289193ED7A80027222E /* Bounce.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bounce.caf; sourceTree = "<group>"; };
+		D9F4D28A193ED7A80027222E /* DeepExplosion.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DeepExplosion.caf; sourceTree = "<group>"; };
+		D9F4D28B193ED7A80027222E /* Explosion.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Explosion.caf; sourceTree = "<group>"; };
+		D9F4D28C193ED7A80027222E /* Laser.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Laser.caf; sourceTree = "<group>"; };
+		D9F4D28D193ED7A80027222E /* Zap.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zap.caf; sourceTree = "<group>"; };
+		D9F4D293193EDCB60027222E /* PlayButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlayButton@2x.png"; sourceTree = "<group>"; };
+		D9F4D294193EDCB60027222E /* ScoreBoard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ScoreBoard@2x.png"; sourceTree = "<group>"; };
+		D9F4D295193EDCB60027222E /* Title@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Title@2x.png"; sourceTree = "<group>"; };
+		D9F4D299193EDD070027222E /* CCMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMenu.h; sourceTree = "<group>"; };
+		D9F4D29A193EDD070027222E /* CCMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMenu.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +170,7 @@
 		D905693F1938B92500F845B7 /* Space Cannons */ = {
 			isa = PBXGroup;
 			children = (
+				D9F4D288193ED7A80027222E /* sounds */,
 				D90569731938B9CF00F845B7 /* space-cannon-assets */,
 				D90569481938B92500F845B7 /* AppDelegate.h */,
 				D90569491938B92500F845B7 /* AppDelegate.m */,
@@ -159,6 +183,10 @@
 				D90569401938B92500F845B7 /* Supporting Files */,
 				D92A3809193CACD4000D0CA7 /* HaloExplosion.sks */,
 				D92A380A193CACD4000D0CA7 /* spark.png */,
+				D9F4D284193EC50B0027222E /* LifeBarExplosion.sks */,
+				D9F4D286193EC76A0027222E /* BounceExplosion.sks */,
+				D9F4D299193EDD070027222E /* CCMenu.h */,
+				D9F4D29A193EDD070027222E /* CCMenu.m */,
 			);
 			path = "Space Cannons";
 			sourceTree = "<group>";
@@ -195,6 +223,9 @@
 		D90569731938B9CF00F845B7 /* space-cannon-assets */ = {
 			isa = PBXGroup;
 			children = (
+				D9F4D293193EDCB60027222E /* PlayButton@2x.png */,
+				D9F4D294193EDCB60027222E /* ScoreBoard@2x.png */,
+				D9F4D295193EDCB60027222E /* Title@2x.png */,
 				D90569741938B9CF00F845B7 /* Ammo0@2x.png */,
 				D90569751938B9CF00F845B7 /* Ammo1@2x.png */,
 				D90569761938B9CF00F845B7 /* Ammo2@2x.png */,
@@ -209,6 +240,18 @@
 				D905697F1938B9CF00F845B7 /* Starfield@2x.png */,
 			);
 			path = "space-cannon-assets";
+			sourceTree = "<group>";
+		};
+		D9F4D288193ED7A80027222E /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				D9F4D289193ED7A80027222E /* Bounce.caf */,
+				D9F4D28A193ED7A80027222E /* DeepExplosion.caf */,
+				D9F4D28B193ED7A80027222E /* Explosion.caf */,
+				D9F4D28C193ED7A80027222E /* Laser.caf */,
+				D9F4D28D193ED7A80027222E /* Zap.caf */,
+			);
+			path = sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,22 +330,32 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9F4D296193EDCB60027222E /* PlayButton@2x.png in Resources */,
 				D905698A1938B9CF00F845B7 /* Halo@2x.png in Resources */,
+				D9F4D285193EC50B0027222E /* LifeBarExplosion.sks in Resources */,
 				D90569881938B9CF00F845B7 /* BlueBar@2x.png in Resources */,
 				D90569441938B92500F845B7 /* InfoPlist.strings in Resources */,
 				D90569851938B9CF00F845B7 /* Ammo5@2x.png in Resources */,
+				D9F4D297193EDCB60027222E /* ScoreBoard@2x.png in Resources */,
+				D9F4D28F193ED7A80027222E /* DeepExplosion.caf in Resources */,
 				D90569811938B9CF00F845B7 /* Ammo1@2x.png in Resources */,
 				D92A380B193CACD4000D0CA7 /* HaloExplosion.sks in Resources */,
 				D90569861938B9CF00F845B7 /* Ball@2x.png in Resources */,
+				D9F4D298193EDCB60027222E /* Title@2x.png in Resources */,
 				D90569571938B92500F845B7 /* Images.xcassets in Resources */,
 				D90569831938B9CF00F845B7 /* Ammo3@2x.png in Resources */,
 				D905694D1938B92500F845B7 /* Main.storyboard in Resources */,
 				D90569801938B9CF00F845B7 /* Ammo0@2x.png in Resources */,
 				D90569821938B9CF00F845B7 /* Ammo2@2x.png in Resources */,
 				D90569871938B9CF00F845B7 /* Block@2x.png in Resources */,
+				D9F4D291193ED7A80027222E /* Laser.caf in Resources */,
 				D905698B1938B9CF00F845B7 /* Starfield@2x.png in Resources */,
 				D90569891938B9CF00F845B7 /* Cannon@2x.png in Resources */,
+				D9F4D292193ED7A80027222E /* Zap.caf in Resources */,
 				D90569841938B9CF00F845B7 /* Ammo4@2x.png in Resources */,
+				D9F4D290193ED7A80027222E /* Explosion.caf in Resources */,
+				D9F4D287193EC76A0027222E /* BounceExplosion.sks in Resources */,
+				D9F4D28E193ED7A80027222E /* Bounce.caf in Resources */,
 				D92A380C193CACD4000D0CA7 /* spark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -324,6 +377,7 @@
 			files = (
 				D90569531938B92500F845B7 /* MyScene.m in Sources */,
 				D90569501938B92500F845B7 /* ViewController.m in Sources */,
+				D9F4D29B193EDD070027222E /* CCMenu.m in Sources */,
 				D905694A1938B92500F845B7 /* AppDelegate.m in Sources */,
 				D90569461938B92500F845B7 /* main.m in Sources */,
 			);
