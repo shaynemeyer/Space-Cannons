@@ -8,6 +8,7 @@
 
 #import "MyScene.h"
 #import "CCMenu.h"
+#import "CCBall.h"
 
 @implementation MyScene
 {
@@ -200,7 +201,7 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
     if(self.ammo > 0){
         self.ammo--;
          // Create ball mode.
-        SKSpriteNode *ball = [SKSpriteNode spriteNodeWithImageNamed:@"Ball"];
+        CCBall *ball = [CCBall spriteNodeWithImageNamed:@"Ball"];
         ball.name = @"ball";
         CGVector rotationVector = radiansToVector(_cannon.zRotation);
         ball.position = CGPointMake(_cannon.position.x + (_cannon.size.width * 0.5 * rotationVector.dx),
@@ -216,6 +217,13 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
         ball.physicsBody.collisionBitMask = kCCEdgeCategory;
         ball.physicsBody.contactTestBitMask = kCCEdgeCategory;
         [self runAction:_laserSound];
+        
+        // Create trail.
+        NSString *ballTrailPath = [[NSBundle mainBundle] pathForResource:@"BallTrail" ofType:@"sks"];
+        SKEmitterNode *ballTrail = [NSKeyedUnarchiver unarchiveObjectWithFile:ballTrailPath];
+        ballTrail.targetNode = _mainLayer;
+        [_mainLayer addChild:ballTrail];
+        ball.trail = ballTrail;
     }
 }
 
@@ -371,6 +379,11 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
     }
     // Remove unused nodes.
     [_mainLayer enumerateChildNodesWithName:@"ball" usingBlock:^(SKNode *node, BOOL *stop) {
+        
+        if ([node respondsToSelector:@selector(updateTrail)]){
+            [node performSelector:@selector(updateTrail) withObject:nil afterDelay:0.0];
+        }
+        
         if(!CGRectContainsPoint(self.frame, node.position)){
             [node removeFromParent];
         }

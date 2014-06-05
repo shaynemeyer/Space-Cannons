@@ -38,6 +38,7 @@
 		D92A380B193CACD4000D0CA7 /* HaloExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = D92A3809193CACD4000D0CA7 /* HaloExplosion.sks */; };
 		D92A380C193CACD4000D0CA7 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = D92A380A193CACD4000D0CA7 /* spark.png */; };
 		D9ECD7E21940991B00A5182D /* BallTrail.sks in Resources */ = {isa = PBXBuildFile; fileRef = D9ECD7E11940991B00A5182D /* BallTrail.sks */; };
+		D9ECD7E519409B5700A5182D /* CCBall.m in Sources */ = {isa = PBXBuildFile; fileRef = D9ECD7E419409B5700A5182D /* CCBall.m */; };
 		D9F4D285193EC50B0027222E /* LifeBarExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = D9F4D284193EC50B0027222E /* LifeBarExplosion.sks */; };
 		D9F4D287193EC76A0027222E /* BounceExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = D9F4D286193EC76A0027222E /* BounceExplosion.sks */; };
 		D9F4D28E193ED7A80027222E /* Bounce.caf in Resources */ = {isa = PBXBuildFile; fileRef = D9F4D289193ED7A80027222E /* Bounce.caf */; };
@@ -99,6 +100,8 @@
 		D92A3809193CACD4000D0CA7 /* HaloExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HaloExplosion.sks; sourceTree = "<group>"; };
 		D92A380A193CACD4000D0CA7 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		D9ECD7E11940991B00A5182D /* BallTrail.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BallTrail.sks; sourceTree = "<group>"; };
+		D9ECD7E319409B5700A5182D /* CCBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBall.h; sourceTree = "<group>"; };
+		D9ECD7E419409B5700A5182D /* CCBall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBall.m; sourceTree = "<group>"; };
 		D9F4D284193EC50B0027222E /* LifeBarExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LifeBarExplosion.sks; sourceTree = "<group>"; };
 		D9F4D286193EC76A0027222E /* BounceExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BounceExplosion.sks; sourceTree = "<group>"; };
 		D9F4D289193ED7A80027222E /* Bounce.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bounce.caf; sourceTree = "<group>"; };
@@ -190,6 +193,8 @@
 				D9F4D299193EDD070027222E /* CCMenu.h */,
 				D9F4D29A193EDD070027222E /* CCMenu.m */,
 				D9ECD7E11940991B00A5182D /* BallTrail.sks */,
+				D9ECD7E319409B5700A5182D /* CCBall.h */,
+				D9ECD7E419409B5700A5182D /* CCBall.m */,
 			);
 			path = "Space Cannons";
 			sourceTree = "<group>";
@@ -381,6 +386,7 @@
 			files = (
 				D90569531938B92500F845B7 /* MyScene.m in Sources */,
 				D90569501938B92500F845B7 /* ViewController.m in Sources */,
+				D9ECD7E519409B5700A5182D /* CCBall.m in Sources */,
 				D9F4D29B193EDD070027222E /* CCMenu.m in Sources */,
 				D905694A1938B92500F845B7 /* AppDelegate.m in Sources */,
 				D90569461938B92500F845B7 /* main.m in Sources */,
