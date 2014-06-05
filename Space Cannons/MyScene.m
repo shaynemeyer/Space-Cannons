@@ -100,7 +100,7 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
         // Create spawn halo actions.
         SKAction *spawnHalo = [SKAction sequence:@[[SKAction waitForDuration:2 withRange:1],
                                                    [SKAction performSelector:@selector(spawnHalo) onTarget:self]]];
-        [self runAction:[SKAction repeatActionForever:spawnHalo]];
+        [self runAction:[SKAction repeatActionForever:spawnHalo] withKey:@"SpawnHalo"];
         
         // Setup Ammo.
         _ammoDisplay = [SKSpriteNode spriteNodeWithImageNamed:@"Ammo5"];
@@ -150,9 +150,7 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
 
 -(void)newGame
 {
-    self.ammo = 5;
-    self.score = 0;
-    _scoreLabel.hidden = NO;
+
     
     [_mainLayer removeAllChildren];
     
@@ -167,14 +165,21 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
         shield.physicsBody.collisionBitMask = 0;
     }
     
+    // Set life bar
     SKSpriteNode *lifeBar = [SKSpriteNode spriteNodeWithImageNamed:@"BlueBar"];
     lifeBar.position = CGPointMake(self.size.width * 0.5, 70);
     lifeBar.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(-lifeBar.size.width * 0.5, 0) toPoint:CGPointMake(lifeBar.size.width * 0.5, 0)];
     lifeBar.physicsBody.categoryBitMask = kCCLifeBarCategory;
     [_mainLayer addChild:lifeBar];
     
-    _gameOver = NO;
+    // Set initial values
+    [self actionForKey:@"SpawnHalo"].speed = 1.0;
+    self.ammo = 5;
+    self.score = 0;
+    _scoreLabel.hidden = NO;
     _menu.hidden = YES;
+    _gameOver = NO;
+
 }
 
 -(void)setAmmo:(int)ammo
@@ -216,6 +221,11 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
 
 -(void)spawnHalo
 {
+    // Increase spawn speed.
+    SKAction *spawnHaloAction = [self actionForKey:@"SpawnHalo"];
+    if(spawnHaloAction.speed < 1.5){
+        spawnHaloAction.speed += 0.01;
+    }
     // Create halo node.
     SKSpriteNode *halo = [SKSpriteNode spriteNodeWithImageNamed:@"Halo"];
     halo.name = @"halo";
