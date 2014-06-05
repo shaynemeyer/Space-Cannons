@@ -12,6 +12,6 @@
 
 @property (nonatomic) int ammo;
 @property (nonatomic) int score;
-
+@property (nonatomic) int pointValue;
 
 @end
