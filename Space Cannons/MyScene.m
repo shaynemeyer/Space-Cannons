@@ -265,8 +265,20 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
     halo.physicsBody.collisionBitMask = kCCEdgeCategory;
     halo.physicsBody.contactTestBitMask = kCCBallCategory | kCCShieldCategory | kCCLifeBarCategory | kCCEdgeCategory;
     
-    // Random point multiplier
-    if (!_gameOver && arc4random_uniform(6) == 0){
+    int haloCount = 0;
+    for (SKNode *node in _mainLayer.children){
+        if ([node.name isEqualToString:@"halo"]) {
+            haloCount++;
+        }
+    }
+    
+    if (haloCount == 4) {
+        // Create bomb powerup
+        halo.texture = [SKTexture textureWithImageNamed:@"HaloBomb"];
+        halo.userData = [[NSMutableDictionary alloc] init];
+        [halo.userData setValue:@YES forKey:@"Bomb"];
+    } else if (!_gameOver && arc4random_uniform(6) == 0) {
+        // Random point multiplier
         halo.texture = [SKTexture textureWithImageNamed:@"HaloX"];
         halo.userData = [[NSMutableDictionary alloc] init];
         [halo.userData setValue:@YES forKey:@"Multiplier"];
@@ -295,8 +307,14 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
         [self addExplosion:firstBody.node.position withName:@"HaloExplosion"];
         [self runAction:_explosionSound];
         
-        if ([[firstBody.node.userData valueForKey:@"Multiplier"] boolValue]){
+        if ([[firstBody.node.userData valueForKey:@"Multiplier"] boolValue]) {
             self.pointValue++;
+        } else if ([[firstBody.node.userData valueForKey:@"Bomb"] boolValue]) {
+            firstBody.node.name = nil;
+            [_mainLayer enumerateChildNodesWithName:@"halo" usingBlock:^(SKNode *node, BOOL *stop) {
+                [self addExplosion:node.position withName:@"HaloExplosion"];
+                [node removeFromParent];
+            }];
         }
         
         firstBody.categoryBitMask = 0;
@@ -309,6 +327,13 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
         
         [self addExplosion:firstBody.node.position withName:@"HaloExplosion"];
         [self runAction:_explosionSound];
+        
+        if ([[firstBody.node.userData valueForKey:@"Bomb"] boolValue]) {
+            // Remove all shields
+            [_mainLayer enumerateChildNodesWithName:@"shield" usingBlock:^(SKNode *node, BOOL *stop) {
+                [node removeFromParent];
+            }];
+        }
         
         firstBody.categoryBitMask = 0;
         [firstBody.node removeFromParent];
