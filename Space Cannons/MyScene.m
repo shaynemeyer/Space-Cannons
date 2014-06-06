@@ -26,6 +26,7 @@
     SKAction *_zapSound;
     BOOL _gameOver;
     NSUserDefaults *_userDefaults;
+    NSMutableArray *_shieldPool;
 }
 
 static const CGFloat SHOOT_SPEED = 1000.0f;
@@ -116,6 +117,21 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
         }]]];
         [self runAction:[SKAction repeatActionForever:incrementAmmo]];
         
+        // Setup shield pool
+        _shieldPool = [[NSMutableArray alloc] init];
+        
+        // Setup shields
+        for (int i = 0; i < 6; i++) {
+            SKSpriteNode *shield = [SKSpriteNode spriteNodeWithImageNamed:@"Block"];
+            shield.name = @"shield";
+            shield.position = CGPointMake(35 + (50 * i), 90);
+            
+            shield.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(42, 9)];
+            shield.physicsBody.categoryBitMask = kCCShieldCategory;
+            shield.physicsBody.collisionBitMask = 0;
+            [_shieldPool addObject:shield];
+        }
+        
         // Setup score display
         _scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"DIN Alternate"];
         _scoreLabel.position = CGPointMake(15, 10);
@@ -163,15 +179,9 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
     
     [_mainLayer removeAllChildren];
     
-    // Setup shields
-    for (int i = 0; i < 6; i++) {
-        SKSpriteNode *shield = [SKSpriteNode spriteNodeWithImageNamed:@"Block"];
-        shield.name = @"shield";
-        shield.position = CGPointMake(35 + (50 * i), 90);
-        [_mainLayer addChild:shield];
-        shield.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(42, 9)];
-        shield.physicsBody.categoryBitMask = kCCShieldCategory;
-        shield.physicsBody.collisionBitMask = 0;
+    while (_shieldPool.count > 0) {
+        [_mainLayer addChild:[_shieldPool objectAtIndex:0]];
+        [_shieldPool removeObjectAtIndex:0];
     }
     
     // Set life bar
@@ -337,6 +347,7 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
         
         firstBody.categoryBitMask = 0;
         [firstBody.node removeFromParent];
+        [_shieldPool addObject:secondBody.node];
         [secondBody.node removeFromParent];
     }
     
@@ -369,16 +380,17 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
 
 -(void)gameOver
 {
-    [_mainLayer enumerateChildNodesWithName:@"halo" usingBlock:^(SKNode *node, BOOL *stop){
+    [_mainLayer enumerateChildNodesWithName:@"halo" usingBlock:^(SKNode *node, BOOL *stop) {
         [self addExplosion:node.position withName:@"HaloExplosion"];
         [node removeFromParent];
     }];
     
-    [_mainLayer enumerateChildNodesWithName:@"ball" usingBlock:^(SKNode *node, BOOL *stop){
+    [_mainLayer enumerateChildNodesWithName:@"ball" usingBlock:^(SKNode *node, BOOL *stop) {
         [node removeFromParent];
     }];
     
-    [_mainLayer enumerateChildNodesWithName:@"shield" usingBlock:^(SKNode *node, BOOL *stop){
+    [_mainLayer enumerateChildNodesWithName:@"shield" usingBlock:^(SKNode *node, BOOL *stop) {
+        [_shieldPool addObject:node];
         [node removeFromParent];
     }];
     
