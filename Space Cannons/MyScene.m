@@ -39,6 +39,7 @@ static const uint32_t kCCBallCategory    = 0x1 << 1;
 static const uint32_t kCCEdgeCategory    = 0x1 << 2;
 static const uint32_t kCCShieldCategory  = 0x1 << 3;
 static const uint32_t kCCLifeBarCategory = 0x1 << 4;
+static const uint32_t kCCShieldUpCategory = 0x1 << 5;
 
 static NSString * const kCCKeyTopScore = @"TopScore";
 
@@ -104,6 +105,11 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
         SKAction *spawnHalo = [SKAction sequence:@[[SKAction waitForDuration:2 withRange:1],
                                                    [SKAction performSelector:@selector(spawnHalo) onTarget:self]]];
         [self runAction:[SKAction repeatActionForever:spawnHalo] withKey:@"SpawnHalo"];
+        
+        // Create spawn shield power up action.
+        SKAction *spawnShieldPowerUp = [SKAction sequence:@[[SKAction waitForDuration:15 withRange:4],
+                                                            [SKAction performSelector:@selector(spawShieldPowerUp) onTarget:self]]];
+        [self runAction:[SKAction repeatActionForever:spawnShieldPowerUp]];
         
         // Setup Ammo.
         _ammoDisplay = [SKSpriteNode spriteNodeWithImageNamed:@"Ammo5"];
@@ -295,6 +301,23 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
     }
     
     [_mainLayer addChild:halo];
+}
+
+-(void)spawShieldPowerUp
+{
+    if (_shieldPool.count > 0){
+        SKSpriteNode *shieldUp = [SKSpriteNode spriteNodeWithImageNamed:@"Block"];
+        shieldUp.name = @"shieldUp";
+        shieldUp.position = CGPointMake(self.size.width + shieldUp.size.width, randomInRange(150, self.size.height - 100));
+        shieldUp.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(42, 9)];
+        shieldUp.physicsBody.categoryBitMask = kCCShieldUpCategory;
+        shieldUp.physicsBody.collisionBitMask = 0;
+        shieldUp.physicsBody.velocity = CGVectorMake(-100, randomInRange(-40, 40));
+        shieldUp.physicsBody.angularVelocity = M_PI;
+        shieldUp.physicsBody.linearDamping = 0.0;
+        shieldUp.physicsBody.angularDamping = 0.0;
+        [_mainLayer addChild:shieldUp];
+    }
 }
 
 -(void)didBeginContact:(SKPhysicsContact *)contact
