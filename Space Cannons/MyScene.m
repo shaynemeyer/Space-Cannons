@@ -24,6 +24,7 @@
     SKAction *_explosionSound;
     SKAction *_laserSound;
     SKAction *_zapSound;
+    SKAction *_shieldUpSound;
     BOOL _gameOver;
     NSUserDefaults *_userDefaults;
     NSMutableArray *_shieldPool;
@@ -158,6 +159,7 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
         _explosionSound = [SKAction playSoundFileNamed:@"Explosion.caf" waitForCompletion:NO];
         _laserSound = [SKAction playSoundFileNamed:@"Laser.caf" waitForCompletion:NO];
         _zapSound = [SKAction playSoundFileNamed:@"Zap.caf" waitForCompletion:NO];
+        _shieldUpSound = [SKAction playSoundFileNamed:@"ShieldUp.caf" waitForCompletion:NO];
         
         // Setup menu
         _menu = [[CCMenu alloc] init];
@@ -248,7 +250,7 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
         ball.physicsBody.friction = 0.0;
         ball.physicsBody.categoryBitMask = kCCBallCategory;
         ball.physicsBody.collisionBitMask = kCCEdgeCategory;
-        ball.physicsBody.contactTestBitMask = kCCEdgeCategory;
+        ball.physicsBody.contactTestBitMask = kCCEdgeCategory | kCCShieldUpCategory;
         [self runAction:_laserSound];
         
         // Create trail.
@@ -399,6 +401,17 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
         [self runAction:_bounceSound];
     }
     
+    if(firstBody.categoryBitMask == kCCBallCategory && secondBody.categoryBitMask == kCCShieldUpCategory){
+        // Hit a shield power up.
+        if (_shieldPool.count > 0){
+            int randomIndex = arc4random_uniform((int)_shieldPool.count);
+            [_mainLayer addChild:[_shieldPool objectAtIndex:randomIndex]];
+            [_shieldPool removeObjectAtIndex:randomIndex];
+            [self runAction:_shieldUpSound];
+        }
+        [firstBody.node removeFromParent];
+        [secondBody.node removeFromParent];
+    }
 }
 
 -(void)gameOver
@@ -409,6 +422,9 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
     }];
     
     [_mainLayer enumerateChildNodesWithName:@"ball" usingBlock:^(SKNode *node, BOOL *stop) {
+        [node removeFromParent];
+    }];
+    [_mainLayer enumerateChildNodesWithName:@"shieldUp" usingBlock:^(SKNode *node, BOOL *stop) {
         [node removeFromParent];
     }];
     
@@ -483,6 +499,12 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
         if(!CGRectContainsPoint(self.frame, node.position)){
             [node removeFromParent];
             self.pointValue = 1;
+        }
+    }];
+    
+    [_mainLayer enumerateChildNodesWithName:@"shieldUp" usingBlock:^(SKNode *node, BOOL *stop) {
+        if (node.position.x + node.frame.size.width < 0){
+            [node removeFromParent];
         }
     }];
     

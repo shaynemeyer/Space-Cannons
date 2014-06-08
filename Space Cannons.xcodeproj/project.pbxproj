@@ -101,6 +101,7 @@
 		D905697F1938B9CF00F845B7 /* Starfield@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Starfield@2x.png"; sourceTree = "<group>"; };
 		D92A3809193CACD4000D0CA7 /* HaloExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HaloExplosion.sks; sourceTree = "<group>"; };
 		D92A380A193CACD4000D0CA7 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		D9B750851944ED3B000EB931 /* ShieldUp.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ShieldUp.caf; sourceTree = "<group>"; };
 		D9B7EFEC1941EDBB00D4E9EC /* HaloBomb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HaloBomb@2x.png"; sourceTree = "<group>"; };
 		D9ECD7E11940991B00A5182D /* BallTrail.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BallTrail.sks; sourceTree = "<group>"; };
 		D9ECD7E319409B5700A5182D /* CCBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBall.h; sourceTree = "<group>"; };
@@ -263,6 +264,7 @@
 				D9F4D28A193ED7A80027222E /* DeepExplosion.caf */,
 				D9F4D28B193ED7A80027222E /* Explosion.caf */,
 				D9F4D28C193ED7A80027222E /* Laser.caf */,
+				D9B750851944ED3B000EB931 /* ShieldUp.caf */,
 				D9F4D28D193ED7A80027222E /* Zap.caf */,
 			);
 			path = sounds;
