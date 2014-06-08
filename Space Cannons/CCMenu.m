@@ -43,9 +43,22 @@
         
         self.score = 0;
         self.topScore = 0;
+        self.touchable = YES;
         
     }
     return self;
+}
+
+-(void)hide
+{
+    self.hidden = YES;
+    self.touchable = NO;
+}
+
+-(void)show
+{
+    self.hidden = NO;
+    self.touchable = YES;
 }
 
 -(void)setScore:(int)score

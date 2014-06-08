@@ -213,7 +213,7 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
     self.pointValue = 1;
     _scoreLabel.hidden = NO;
     _pointLabel.hidden = NO;
-    _menu.hidden = YES;
+    [_menu hide];
     _gameOver = NO;
 
 }
@@ -494,10 +494,12 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
         [_userDefaults setInteger:self.score forKey:kCCKeyTopScore];
         [_userDefaults synchronize];
     }
-    _menu.hidden = NO;
     _gameOver = YES;
     _scoreLabel.hidden = YES;
     _pointLabel.hidden = YES;
+    [self runAction:[SKAction waitForDuration:1.5] completion:^{
+        [_menu show];
+    }];
 }
 -(void)addExplosion:(CGPoint)position withName:(NSString *)name
 {
@@ -525,7 +527,7 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     for (UITouch *touch in touches) {
-        if (_gameOver){
+        if (_gameOver && _menu.touchable) {
             SKNode *n = [_menu nodeAtPoint:[touch locationInNode:_menu]];
             if ([n.name isEqualToString:@"Play"]) {
                 [self newGame];
