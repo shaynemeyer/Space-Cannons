@@ -263,6 +263,17 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
     }
 }
 
+-(void)setGamePaused:(BOOL)gamePaused
+{
+    if (!_gameOver) {
+        _gamePaused = gamePaused;
+        _pauseButton.hidden = gamePaused;
+        _resumeButton.hidden = !gamePaused;
+        self.paused = gamePaused;
+    }
+
+}
+
 -(void)shoot
 {
      // Create ball mode.
@@ -534,8 +545,10 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
     /* Called when a touch begins */
     
     for (UITouch *touch in touches) {
-        if (!_gameOver){
-            _didShoot = YES;
+        if (!_gameOver && !self.gamePaused) {
+            if (![_pauseButton containsPoint:[touch locationInNode:_pauseButton.parent]]) {
+               _didShoot = YES;
+            }
         }
     }
 }
@@ -547,6 +560,16 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
             SKNode *n = [_menu nodeAtPoint:[touch locationInNode:_menu]];
             if ([n.name isEqualToString:@"Play"]) {
                 [self newGame];
+            }
+        } else if (!_gameOver) {
+            if (self.gamePaused) {
+                if ([_resumeButton containsPoint:[touch locationInNode:_resumeButton.parent]]) {
+                    self.gamePaused = NO;
+                }
+            } else {
+                if ([_pauseButton containsPoint:[touch locationInNode:_pauseButton.parent]]) {
+                    self.gamePaused = YES;
+                }
             }
         }
     }
