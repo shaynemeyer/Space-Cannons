@@ -43,6 +43,7 @@
 		D9B7508E19452101000EB931 /* PauseButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B7508C19452101000EB931 /* PauseButton@2x.png */; };
 		D9B7508F19452101000EB931 /* ResumeButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B7508D19452101000EB931 /* ResumeButton@2x.png */; };
 		D9B7EFED1941EDBB00D4E9EC /* HaloBomb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B7EFEC1941EDBB00D4E9EC /* HaloBomb@2x.png */; };
+		D9DE76921945E0AF00A46C92 /* ObservingTheStar.caf in Resources */ = {isa = PBXBuildFile; fileRef = D9DE76911945E0AF00A46C92 /* ObservingTheStar.caf */; };
 		D9ECD7E21940991B00A5182D /* BallTrail.sks in Resources */ = {isa = PBXBuildFile; fileRef = D9ECD7E11940991B00A5182D /* BallTrail.sks */; };
 		D9ECD7E519409B5700A5182D /* CCBall.m in Sources */ = {isa = PBXBuildFile; fileRef = D9ECD7E419409B5700A5182D /* CCBall.m */; };
 		D9ECD7E71940A04D00A5182D /* HaloX@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9ECD7E61940A04D00A5182D /* HaloX@2x.png */; };
@@ -112,6 +113,7 @@
 		D9B7508C19452101000EB931 /* PauseButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PauseButton@2x.png"; sourceTree = "<group>"; };
 		D9B7508D19452101000EB931 /* ResumeButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ResumeButton@2x.png"; sourceTree = "<group>"; };
 		D9B7EFEC1941EDBB00D4E9EC /* HaloBomb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HaloBomb@2x.png"; sourceTree = "<group>"; };
+		D9DE76911945E0AF00A46C92 /* ObservingTheStar.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ObservingTheStar.caf; sourceTree = "<group>"; };
 		D9ECD7E11940991B00A5182D /* BallTrail.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BallTrail.sks; sourceTree = "<group>"; };
 		D9ECD7E319409B5700A5182D /* CCBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBall.h; sourceTree = "<group>"; };
 		D9ECD7E419409B5700A5182D /* CCBall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBall.m; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 		D9F4D288193ED7A80027222E /* sounds */ = {
 			isa = PBXGroup;
 			children = (
+				D9DE76911945E0AF00A46C92 /* ObservingTheStar.caf */,
 				D9B750861944F0D2000EB931 /* ShieldUp.caf */,
 				D9F4D289193ED7A80027222E /* Bounce.caf */,
 				D9F4D28A193ED7A80027222E /* DeepExplosion.caf */,
@@ -385,6 +388,7 @@
 				D90569871938B9CF00F845B7 /* Block@2x.png in Resources */,
 				D9B7EFED1941EDBB00D4E9EC /* HaloBomb@2x.png in Resources */,
 				D9F4D291193ED7A80027222E /* Laser.caf in Resources */,
+				D9DE76921945E0AF00A46C92 /* ObservingTheStar.caf in Resources */,
 				D905698B1938B9CF00F845B7 /* Starfield@2x.png in Resources */,
 				D90569891938B9CF00F845B7 /* Cannon@2x.png in Resources */,
 				D9F4D292193ED7A80027222E /* Zap.caf in Resources */,

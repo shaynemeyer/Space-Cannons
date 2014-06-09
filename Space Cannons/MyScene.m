@@ -9,9 +9,11 @@
 #import "MyScene.h"
 #import "CCMenu.h"
 #import "CCBall.h"
+#import <AVFoundation/AVFoundation.h>
 
 @implementation MyScene
 {
+    AVAudioPlayer *_audioPlayer;
     SKNode *_mainLayer;
     CCMenu *_menu;
     SKSpriteNode *_cannon;
@@ -196,6 +198,20 @@ static inline CGFloat randomInRange(CGFloat low, CGFloat high)
         // Load top score
         _userDefaults = [NSUserDefaults standardUserDefaults];
         _menu.topScore = [_userDefaults integerForKey:kCCKeyTopScore];
+        
+        // Load music
+        NSURL *url = [[NSBundle mainBundle] URLForResource:@"ObservingTheStar" withExtension:@"caf"];
+        NSError *error = nil;
+        _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+        
+        if (!_audioPlayer) {
+            NSLog(@"Error loading audio player: %@", error);
+        }
+        else {
+            _audioPlayer.numberOfLoops = -1;
+            _audioPlayer.volume = 0.8;
+            [_audioPlayer play];
+        }
     }
     return self;
 }
